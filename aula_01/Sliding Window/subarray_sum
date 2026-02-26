@@ -1,0 +1,47 @@
+# ============================================================
+# PROBLEMA:
+# Dado um array de números positivos e um target,
+# verifique se existe um subarray contínuo cuja soma seja igual a X.
+#
+# Exemplo:
+# [1, 2, 3, 7, 5], target = 12
+# Resultado: True (2 + 3 + 7 = 12)
+#
+# FUNDAMENTOS UTILIZADOS:
+# ✔ Tipos de dados -> int, list
+# ✔ Operadores -> +, -, ==, >
+# ✔ Estruturas de controle -> for, while, if
+# ✔ Estruturas de dados -> lista (array)
+# ✔ Funções -> def, return
+#
+# IDEIA DO SLIDING WINDOW:
+# 1. Expandimos a janela somando elementos
+# 2. Enquanto soma > target → contraímos da esquerda
+# 3. Se soma == target → encontramos
+# ============================================================
+
+def subarray_sum(numbers, target):
+    left = 0
+    current_sum = 0
+
+    for right in range(len(numbers)):
+        current_sum += numbers[right]  # Expande janela
+
+        # Enquanto soma for maior que target
+        while current_sum > target:
+            current_sum -= numbers[left]  # Contraímos
+            left += 1
+
+        if current_sum == target:
+            return True
+
+    return False
+
+
+# ===== Testando =====
+array = [1, 2, 3, 7, 5]
+target = 12
+
+print("Array:", array)
+print("Target:", target)
+print("Existe subarray com soma X?", subarray_sum(array, target))
